@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tailors-registration.css">
+    <script src="tailors-registration.js" defer></script>
+    <title>ReVIVE - Tailors Registration</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="ReVIVE Logo" class="logo-image">
+            <h1 class="logo-text">ReVIVE</h1>
+        </div>
+        <nav class="navigation">
+            <a href="home.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contacts</a>
+            <a href="roles.html">Roles/Login</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="registration-box">
+            <img src="logo.png" alt="ReVIVE Logo">
+            <h1>Tailors Registration</h1>
+            <p>Join us in Reliving, Reusing, and Recycling</p>
+
+            <form id="tailorRegistrationForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}"
+                    required>
+
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+
+                <label>Ability to Stitch Cloth Bags</label>
+                <div class="size-options">
+                    <label><input type="checkbox" name="sizes" value="Small"> Small</label>
+                    <label><input type="checkbox" name="sizes" value="Medium"> Medium</label>
+                    <label><input type="checkbox" name="sizes" value="Large"> Large</label>
+                    <label><input type="checkbox" name="sizes" value="Custom"> Custom Sizes</label>
+                </div>
+
+                <button type="submit">Register</button>
+                <a href="tailors-dashboard.html" class="next-button">Next</a>
+            </form>
+
+            <div class="success-message" id="successMessage" style="display: none;">
+                Registration successful! Welcome to ReVIVE.
+            </div>
+            <div class="error-message" id="errorMessage" style="display: none;">
+                Please fill out all required fields correctly.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(90deg, #00A0A8, #66D37A);
+    color: black;
+    min-height: 100vh;
+
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.registration-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.registration-box img {
+    max-width: 100px;
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
+.registration-box h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.registration-box p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.registration-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.registration-box label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.registration-box input[type="text"],
+.registration-box input[type="email"],
+.registration-box input[type="tel"],
+.registration-box textarea,
+.registration-box select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.registration-box input[type="file"] {
+    margin-bottom: 15px;
+}
+
+.registration-box .size-options {
+    margin-bottom: 15px;
+}
+
+.registration-box .size-options label {
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.registration-box button {
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.next-button {
+    text-align: right;
+    align-items: flex-end;
+
+
+
+}
+
+.registration-box button:hover {
+    background-color: #45a049;
+}
+
+.success-message {
+    text-align: center;
+    color: green;
+    margin-top: 20px;
+}
+
+.error-message {
+    text-align: center;
+    color: red;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .registration-box {
+        padding: 20px;
+    }
+
+    .registration-box h1 {
+        font-size: 28px;
+    }
+
+    .registration-box button {
+        font-size: 14px;
+    }
+}
+
+.header {
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    background-color: #586a36;
+    padding: 10px 20px;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-image {
+    width: 40px;
+    /* Adjust width as needed */
+    height: auto;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+
+.navigation {
+    display: flex;
+    gap: 20px;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+}

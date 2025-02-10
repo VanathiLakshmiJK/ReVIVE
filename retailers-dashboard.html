@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReVIVE - Retailers Dashboard</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(90deg, #00A0A8, #66D37A);
+            color: black;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dashboard {
+            display: flex;
+            align-items: center;
+            background-color: #586a36;
+            color: white;
+            padding: 15px;
+        }
+
+        .dashboard img {
+            max-width: 50px;
+            margin-right: 15px;
+        }
+
+        .dashboard h1 {
+            margin: 0;
+            font-size: 24px;
+            flex-grow: 1;
+        }
+
+        .dashboard-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .dashboard-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .dashboard-menu a:hover {
+            color: #ddd;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .upload-page,
+        .home-page {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .upload-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .upload-form label {
+            display: block;
+            text-align: left;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .upload-form input[type="text"],
+        .upload-form input[type="number"],
+        .upload-form select,
+        .upload-form input[type="file"] {
+
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .upload-form button {
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+            float: left;
+            margin-top: 10px;
+        }
+
+        .upload-form button:hover {
+            background-color: #45a049;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            margin-top: 20px;
+        }
+
+        .cloth-list {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cloth-list h3 {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .cloth-item {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .cloth-item img {
+            max-width: 100px;
+            margin-right: 10px;
+        }
+
+        .cloth-item div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .upload-form {
+                padding: 15px;
+            }
+
+            .dashboard h1 {
+                font-size: 20px;
+            }
+
+            .dashboard-menu a {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Dashboard with Logo and Menu -->
+    <div class="dashboard">
+        <img src="logo.png" alt="ReVIVE Logo">
+        <h1>Retailers Dashboard</h1>
+        <div class="dashboard-menu">
+            <a href="home.html">Home</a>
+            <a href="#" id="uploadLink">Upload</a>
+            <a href="#" id="homeLink">List</a>
+        </div>
+    </div>
+
+    <!-- Home Page Content -->
+    <div class="content home-page" id="homeContent">
+        <h2>Uploaded Clothes</h2>
+        <div class="cloth-list" id="clothes-list">No clothes uploaded yet!</div>
+
+    </div>
+
+    <!-- Upload Page Content -->
+    <div class="content upload-page" id="uploadContent">
+        <h2>Upload Cloth Details</h2>
+        <div class="upload-form">
+            <form id="uploadForm">
+                <label for="quantity">Quantity (in kg)</label>
+                <input type="number" id="quantity" name="quantity" placeholder="Enter quantity in kg" required>
+
+                <label for="type">Type of Cloth</label>
+                <select id="type" name="type" required>
+                    <option value="" disabled selected>Select cloth type</option>
+                    <option value="Saree">Saree</option>
+                    <option value="Dhoti">Dhoti</option>
+                    <option value="Bedsheet">Bedsheet</option>
+                </select>
+
+                <label for="price">Price per kg</label>
+                <input type="text" id="price" name="price" placeholder="Enter price per kg" required>
+
+                <label for="clothImage">Upload Cloth Image</label>
+                <input type="file" id="clothImage" name="clothImage" accept="image/*" required>
+
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+        <div class="success-message" id="successMessage" style="display: none;">
+            Cloth details uploaded successfully!
+        </div>
+    </div>
+
+    <script>
+        // Handle page navigation
+        const homeLink = document.getElementById('homeLink');
+        const uploadLink = document.getElementById('uploadLink');
+        const homeContent = document.getElementById('homeContent');
+        const uploadContent = document.getElementById('uploadContent');
+        const clothList = document.getElementById('clothList');
+
+        homeLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            homeContent.style.display = 'block';
+            uploadContent.style.display = 'none';
+            displayClothItems();
+        });
+
+        uploadLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            homeContent.style.display = 'none';
+            uploadContent.style.display = 'block';
+        });
+
+        // Handle form submission and save data in MongoDB
+        const uploadForm = document.getElementById('uploadForm');
+        const successMessage = document.getElementById('successMessage');
+
+        uploadForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Collect form data
+            const quantity = document.getElementById('quantity').value;
+            const type = document.getElementById('type').value;
+            const price = document.getElementById('price').value;
+            const clothImage = document.getElementById('clothImage').files[0];
+
+            // Convert image to base64 for uploading
+            const reader = new FileReader();
+            reader.onload = async function (e) {
+                const imageUrl = e.target.result;
+
+                // Cloth data to send to backend
+                const clothData = {
+                    quantity,
+                    type,
+                    price,
+                    imageUrl
+                };
+
+                // Send data to the server
+                try {
+                    const response = await fetch('http://localhost:5001/api/retailer-dashboard/upload', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(clothData)
+                    });
+
+                    if (response.ok) {
+                        successMessage.style.display = 'block';
+                        uploadForm.reset();
+                    } else {
+                        console.error('Failed to upload cloth details');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+            reader.readAsDataURL(clothImage);
+        });
+
+        // Fetch and display cloth items
+        // Function to display the uploaded cloth items
+        document.addEventListener("DOMContentLoaded", function () {
+            displayClothItems(); // This will be called when the DOM is ready
+        });
+        async function displayClothItems() {
+            try {
+                const response = await fetch('http://localhost:5001/api/retailer-dashboard/list');
+                const clothItems = await response.json();
+
+                const clothesListContainer = document.getElementById('clothes-list');
+
+                if (!clothesListContainer) {
+                    console.error('clothes-list element not found');
+                    return;
+                }
+
+                if (clothItems.length === 0) {
+                    clothesListContainer.innerHTML = 'No clothes uploaded yet!';
+                } else {
+                    // Clear previous content
+                    clothesListContainer.innerHTML = '';
+
+                    // Add the fetched items to the page
+                    clothItems.forEach(item => {
+                        const clothElement = document.createElement('div');
+                        clothElement.classList.add('cloth-item');
+                        clothElement.innerHTML = `
+                    <div>Type: ${item.type}</div>
+                    <div>Price: ₹${item.price}</div>
+                    <div>Quantity: ${item.quantity}</div>
+                    <div>Image: <img src="${item.imageUrl}" alt="${item.type}" width="100" /></div>
+                `;
+                        clothesListContainer.appendChild(clothElement);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching cloth items:', error);
+                const clothesListContainer = document.getElementById('clothes-list');
+                if (clothesListContainer) {
+                    clothesListContainer.innerHTML = 'Failed to load clothes.';
+                }
+            }
+        }
+
+
+        // Show Home Page by default
+        homeContent.style.display = 'block';
+    </script>
+
+</body>
+
+</html>

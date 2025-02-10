@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkeeper's Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .item {
+            background-color: white;
+            border-radius: 8px;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .cart-button:hover {
+            background-color: #45a049;
+        }
+
+        .proceed-button {
+            background-color: #f44336;
+            color: white;
+            padding: 15px 30px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 18px;
+        }
+
+        .proceed-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Shopkeeper Dashboard</h1>
+        <p>View and purchase cloth bags uploaded by tailors</p>
+    </header>
+
+    <div id="shopkeeperContent"></div>
+    <button id="proceedToPay" class="proceed-button" style="display: none;" onclick="proceedToPay()">Proceed to
+        Pay</button>
+
+    <script>
+        let cart = [];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchTailorItems();
+        });
+
+        function fetchTailorItems() {
+            fetch("http://localhost:5001/api/shopkeeper-dashboard/items")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => displayItems(data))
+                .catch(error => console.error("Error fetching items:", error));
+        }
+
+        function displayItems(items) {
+            const shopkeeperContent = document.getElementById("shopkeeperContent");
+            shopkeeperContent.innerHTML = "";
+
+            items.forEach(item => {
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("item");
+
+                itemDiv.innerHTML = `
+                    <h3>${item.type}</h3>
+                    <p>Quantity: ${item.quantity} kg</p>
+                    <p>Price: ₹${item.price}/kg</p>
+                    <button class="cart-button" onclick="addToCart('${item._id}', '${item.type}', ${item.quantity}, ${item.price})">Add to Cart</button>
+                `;
+                shopkeeperContent.appendChild(itemDiv);
+            });
+        }
+
+        function addToCart(itemId, type, quantity, price) {
+            cart.push({ id: itemId, type: type, quantity: quantity, price: price });
+            alert(`${type} added to your cart!`);
+            updateProceedButton();
+        }
+
+        function updateProceedButton() {
+            const proceedButton = document.getElementById("proceedToPay");
+            proceedButton.style.display = cart.length > 0 ? "inline-block" : "none";
+        }
+
+        function proceedToPay() {
+            localStorage.setItem("cartItems", JSON.stringify(cart));
+            window.location.href = "payment-shop.html"; // Redirect to payment page
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .cart-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Checkout</h1>
+    <div id="cartItems"></div>
+    <p class="total" id="totalAmount"></p>
+    <button onclick="confirmPayment()">Confirm Payment</button>
+
+    <script>
+        function displayCartItems() {
+            const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            const cartItemsDiv = document.getElementById("cartItems");
+            let totalAmount = 0;
+
+            cartItems.forEach(item => {
+                totalAmount += item.quantity * item.price;
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("cart-item");
+
+                itemDiv.innerHTML = `
+                    <h3>${item.type}</h3>
+                    <p>Quantity: ${item.quantity} kg</p>
+                    <p>Price: ₹${item.price}/kg</p>
+                    <p>Subtotal: ₹${item.quantity * item.price}</p>
+                `;
+                cartItemsDiv.appendChild(itemDiv);
+            });
+
+            document.getElementById("totalAmount").textContent = `Total: ₹${totalAmount}`;
+        }
+
+        function confirmPayment() {
+            alert("Payment confirmed! Thank you for your purchase.");
+            localStorage.removeItem("cartItems"); // Clear cart after payment
+            window.location.href = "thankyou.html"; // Redirect to thank you page
+        }
+
+        displayCartItems();
+    </script>
+</body>
+
+</html>

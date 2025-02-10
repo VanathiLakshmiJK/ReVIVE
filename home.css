@@ -1,0 +1,235 @@
+/* General styling */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(90deg, #00A0A8, #66D37A);
+    color: black;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #586a36;
+    padding: 10px 20px;
+    color: white;
+
+    width: 1320px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-image {
+    width: 40px;
+    height: auto;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.navigation {
+    display: flex;
+    gap: 15px;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Section */
+/* Hero Section */
+.hero-section {
+    background: url('Revive_img.png') no-repeat center center/cover;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+/* Full-width and height overlay */
+.hero-content {
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 150%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.cta-button {
+    background-color: #66D37A;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #00A0A8;
+}
+
+/* Mission & Vision Section */
+.mission-vision-section {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.mission-box,
+.vision-box,
+.value-box {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Call to Action Section */
+.cta-section {
+    background-color: #00A0A8;
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.scroll-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 15px;
+
+}
+
+.scroll-wrapper {
+    display: flex;
+    gap: 20px;
+    animation: scroll 30s linear infinite;
+
+}
+
+.cards {
+    display: flex;
+    gap: 10px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    animation: scroll 30s linear infinite;
+    /* Infinite scroll animation */
+}
+
+.feature-card {
+    background-color: #84544c;
+    color: #62c460;
+    height: 300px;
+    width: 250%;
+    padding: 20px;
+    margin: 1px;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+    /* Hides overflowed content */
+    text-overflow: ellipsis;
+    /* Adds "..." to overflowed text */
+    white-space: normal;
+    /* Ensures text wraps to fit inside the box */
+    line-height: 1.4em;
+    /* Adjusts line height for readability */
+
+    /* Sets a fixed height to control box size */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.feature-card:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+    transition: 2s;
+}
+
+.feature-card img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+    align-content: center;
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #ffffff;
+    font-size: 0.85em;
+    /* Slightly smaller font */
+    align-content: center;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}

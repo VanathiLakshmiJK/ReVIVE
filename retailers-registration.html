@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReVIVE - Retailers Registration</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(90deg, #00A0A8, #66D37A);
+            color: black;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .registration-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .registration-box img {
+            max-width: 100px;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+
+        .registration-box h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .registration-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .registration-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .registration-box label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .registration-box input[type="text"],
+        .registration-box input[type="tel"],
+        .registration-box textarea,
+        .registration-box select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .registration-box button {
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .registration-box button:hover {
+            background-color: #45a049;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            text-align: center;
+            color: red;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .registration-box {
+                padding: 20px;
+            }
+
+            .registration-box h1 {
+                font-size: 28px;
+            }
+
+            .registration-box button {
+                font-size: 14px;
+            }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #586a36;
+            padding: 10px 20px;
+            color: white;
+            position: fixed;
+            width: 1325px;
+
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-image {
+            width: 40px;
+            height: auto;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="ReVIVE Logo" class="logo-image">
+            <h1 class="logo-text">ReVIVE</h1>
+        </div>
+        <nav class="navigation">
+            <a href="home.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">ContactUs</a>
+            <a href="roles.html">Roles/Login</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="registration-box">
+            <img src="logo.png" alt="ReVIVE Logo">
+            <h1>Retailers Registration</h1>
+            <p>Join us in Reliving, Reusing, and Recycling</p>
+
+            <form id="retailerRegistrationForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}"
+                    required>
+
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+
+                <label for="storeType">Store Type</label>
+                <select id="storeType" name="storeType" required>
+                    <option value="">Select Store Type</option>
+                    <option value="wholesale">Wholesale</option>
+                    <option value="small-store">Small Store</option>
+                </select>
+
+                <label for="clothAvailability">Cloth Availability (Weight per month in kg)</label>
+                <input type="text" id="clothAvailability" name="clothAvailability"
+                    placeholder="Enter the approximate weight of cloth available per month" required>
+
+                <button type="submit">Register</button>
+            </form>
+            <a href="retailers-dashboard.html" class="next-button">Next</a>
+            <div class="success-message" id="successMessage" style="display: none;">
+                Registration successful! Welcome to ReVIVE.
+            </div>
+            <div class="error-message" id="errorMessage" style="display: none;">
+                Please fill out all required fields correctly.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('retailerRegistrationForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent actual form submission
+
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const storeType = document.getElementById('storeType').value;
+            const clothAvailability = document.getElementById('clothAvailability').value.trim();
+
+            if (name === "" || phone === "" || address === "" || storeType === "" || clothAvailability === "") {
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                return;
+            }
+
+            // Send a POST request to the backend to register the retailer
+            try {
+                // Frontend fetch request
+                const response = await fetch('http://localhost:5001/api/retailers/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        phone,
+                        address,
+                        storeType,
+                        clothAvailability
+                    })
+                });
+
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                } else {
+                    document.getElementById('errorMessage').textContent = result.message || 'Error registering retailer';
+                    document.getElementById('errorMessage').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error during registration:', error);
+                document.getElementById('errorMessage').textContent = 'Error registering retailer';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>

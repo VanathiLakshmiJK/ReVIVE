@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tailors-dashboard.css">
+    <title>ReVIVE - Tailors Dashboard</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="ReVIVE Logo" class="logo-image">
+            <h1 class="logo-text">ReVIVE</h1>
+        </div>
+        <nav class="navigation">
+            <a href="home.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contacts</a>
+            <a href="roles.html">Roles/Login</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div id="homeContent">
+            <h2>Available Cloths</h2>
+
+            <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <!-- Add more cloth items if needed -->
+    </div>
+    </div>
+
+    <!-- Cart Content -->
+    <div id="cartContent" style="display:none;">
+        <h2>Your Cart</h2>
+        <ul id="cartList"></ul>
+
+    </div>
+    </div>
+    <a href="payment.html" class="proceed-button">Proceed To Pay</a>
+    <a href="tailors-upload.html" class="proceed-button">Upload Bag</a>
+    <script src="tailors-dashboard.js"></script>
+</body>
+
+</html>
